@@ -40,9 +40,4 @@ export class UsersController {
     console.log(dto);
     return;
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
-  }
-}
+가}
