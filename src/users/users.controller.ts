@@ -5,7 +5,7 @@ import {VerifyEmailDto} from './dto/verify.email.dto';
 import {UserLoginDto} from './dto/user.login.dto';
 
 /**
- * 유저 서비스 컨트롤러
+ * 유저 컨트롤러
  */
 @Controller('users')
 export class UsersController {
