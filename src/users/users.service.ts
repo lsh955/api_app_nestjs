@@ -8,6 +8,8 @@ import {EmailService} from 'src/email/email.service';
  */
 @Injectable()
 export class UsersService {
+  constructor(private emailService: EmailService) {}
+
   /**
    * 유저 회원가입
    *
