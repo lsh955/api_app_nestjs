@@ -33,3 +33,9 @@ $ yarn run test:e2e
 # test coverage
 $ yarn run test:cov
 ```
+## 기술 요구사항
+
+- TypeScript
+- NestJS
+- TypeORM
+- MySQL
