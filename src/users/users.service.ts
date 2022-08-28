@@ -1,6 +1,7 @@
 import * as uuid from 'uuid';
-
 import {Injectable} from '@nestjs/common';
+
+import {EmailService} from 'src/email/email.service';
 
 /**
  * 유저 서비스(정보저장, 조회하는 역할을 위주로...)
