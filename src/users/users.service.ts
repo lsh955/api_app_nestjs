@@ -3,7 +3,7 @@ import * as uuid from 'uuid';
 import {Injectable} from '@nestjs/common';
 
 /**
- * 유저 서비스
+ * 유저 서비스(정보저장, 조회하는 역할을 위주로...)
  */
 @Injectable()
 export class UsersService {
