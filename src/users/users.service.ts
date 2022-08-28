@@ -45,7 +45,12 @@ export class UsersService {
    * @param signupVerifyToken 가입토큰
    * @private
    */
-  private saveUser(name: string, email: string, password: string, signupVerifyToken: string) {
+  private saveUser(
+    name: string,
+    email: string,
+    password: string,
+    signupVerifyToken: string,
+  ) {
     return; // TODO: DB 연동 후 구현
   }
 
