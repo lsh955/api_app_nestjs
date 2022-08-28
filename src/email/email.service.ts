@@ -9,6 +9,9 @@ interface EmailOptions {
   html: string;     // 메일본문
 }
 
+/**
+ * 이메일 서비스
+ */
 @Injectable()
 export class EmailService {
   private transporter: Mail;
@@ -17,8 +20,8 @@ export class EmailService {
     this.transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: '',   // TODO: 이메일계정 아이디 입력
-        pass: '',   // TODO: 이메일계정 비밀번호 입력
+        user: '', // TODO: 이메일계정 아이디 입력
+        pass: '', // TODO: 이메일계정 비밀번호 입력
       },
     });
   }
