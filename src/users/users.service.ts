@@ -62,4 +62,17 @@ export class UsersService {
       signupVerifyToken,
     );
   }
+
+  /**
+   * 이메일 인증
+   *
+   * @param signupVerifyToken 가입토큰
+   */
+  async verifyEmail(signupVerifyToken: string): Promise<string> {
+    // TODO
+    // 1. DB 에서 signupVerifyToken 으로 회원가입 처리중인 유저가 있는지 조회하고 없다면 에러 처리
+    // 2. 바로 로그인 상태가 되도록 JWT 를 발급
+
+    throw new Error('Method not implemented');
+  }
 }
