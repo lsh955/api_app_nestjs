@@ -14,6 +14,7 @@ export class UsersController {
 
   /**
    * 회원가입
+   *
    * @param createUserDto 회원가입 Dto
    */
   @Post()
@@ -24,6 +25,7 @@ export class UsersController {
 
   /**
    * 이메일 인증
+   *
    * @param verifyEmailDto  이메일인증 Dto
    */
   @Post('/email-verify')
