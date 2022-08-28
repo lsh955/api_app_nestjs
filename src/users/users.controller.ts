@@ -34,11 +34,13 @@ export class UsersController {
 
   /**
    * 로그인
+   *
    * @param userLoginDto 유저로그인 Dto
    */
   @Post('/login')
   async login(@Body() userLoginDto: UserLoginDto): Promise<string> {
-    console.log(userLoginDto);
-    return;
+    const {email, password} = userLoginDto;
+
+    return await this.usersService.login(email, password);
   }
 }
