@@ -10,4 +10,16 @@ interface EmailOptions {
 }
 
 @Injectable()
-export class EmailService {}
+export class EmailService {
+  private transporter: Mail;
+
+  constructor() {
+    this.transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: '',   // TODO: 이메일계정 아이디 입력
+        pass: '',   // TODO: 이메일계정 비밀번호 입력
+      },
+    });
+  }
+}
