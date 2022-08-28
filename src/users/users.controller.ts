@@ -13,31 +13,31 @@ export class UsersController {
 
   /**
    * 회원가입
-   * @param dto
+   * @param createUserDto
    */
   @Post()
-  create(@Body() dto: CreateUserDto) {
-    console.log(dto);
-    return this.usersService.create(dto);
+  create(@Body() createUserDto: CreateUserDto) {
+    console.log(createUserDto);
+    return this.usersService.create(createUserDto);
   }
 
   /**
    * 이메일 인증
-   * @param dto
+   * @param verifyEmailDto
    */
   @Post('/email-verify')
-  async verifyEmail(@Query() dto: VerifyEmailDto): Promise<string> {
-    console.log(dto);
+  async verifyEmail(@Query() verifyEmailDto: VerifyEmailDto): Promise<string> {
+    console.log(verifyEmailDto);
     return;
   }
 
   /**
    * 로그인
-   * @param dto
+   * @param userLoginDto
    */
   @Post('/login')
-  async login(@Body() dto: UserLoginDto): Promise<string> {
-    console.log(dto);
+  async login(@Body() userLoginDto: UserLoginDto): Promise<string> {
+    console.log(userLoginDto);
     return;
   }
 }
