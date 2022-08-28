@@ -16,6 +16,8 @@ interface EmailOptions {
 export class EmailService {
   private transporter: Mail;
 
+  // TODO :: 계정정보와 인증 URL 은 추후에 환변변수로 뺄 것.
+
   constructor() {
     this.transporter = nodemailer.createTransport({
       service: 'Gmail',
