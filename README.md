@@ -1,6 +1,6 @@
 ## Description
 
-[Nest](https://github.com/nestjs/nest) 프레임워크와 TypeScript 시작으로, 회원가입, 이메일인증, 로그인, 회원정보조회 등으로 구성한 유저서비스
+[Nest](https://github.com/nestjs/nest) 프레임워크와 TypeScript 시작으로 회원가입, 이메일인증, 로그인, 회원정보조회 등으로 구성한 유저서비스
 
 ## Installation
 
