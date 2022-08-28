@@ -57,6 +57,9 @@ export class UsersService {
    * @private
    */
   private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
-    await this.emailService.sendMemberJoinVerification(email, signupVerifyToken);
+    await this.emailService.sendMemberJoinVerification(
+      email,
+      signupVerifyToken,
+    );
   }
 }
