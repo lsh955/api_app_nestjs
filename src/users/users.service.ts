@@ -2,6 +2,9 @@ import * as uuid from 'uuid';
 
 import {Injectable} from '@nestjs/common';
 
+/**
+ * 유저 서비스
+ */
 @Injectable()
 export class UsersService {
   async createUser(name: string, email: string, password: string) {
