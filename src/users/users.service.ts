@@ -7,6 +7,13 @@ import {Injectable} from '@nestjs/common';
  */
 @Injectable()
 export class UsersService {
+  /**
+   * 유저 회원가입
+   *
+   * @param name      성함
+   * @param email     이메일
+   * @param password  비밀번호
+   */
   async createUser(name: string, email: string, password: string) {
     await this.checkUserExists(email);
 
@@ -40,7 +47,7 @@ export class UsersService {
   }
 
   /**
-   * 회원가입 인증 이메일 발송
+   * 인증 이메일 발송
    *
    * @param email             이메일
    * @param signupVerifyToken 가입토큰

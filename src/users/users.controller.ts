@@ -13,7 +13,7 @@ export class UsersController {
 
   /**
    * 회원가입
-   * @param createUserDto
+   * @param createUserDto 회원가입 Dto
    */
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -23,7 +23,7 @@ export class UsersController {
 
   /**
    * 이메일 인증
-   * @param verifyEmailDto
+   * @param verifyEmailDto  이메일인증 Dto
    */
   @Post('/email-verify')
   async verifyEmail(@Query() verifyEmailDto: VerifyEmailDto): Promise<string> {
@@ -33,7 +33,7 @@ export class UsersController {
 
   /**
    * 로그인
-   * @param userLoginDto
+   * @param userLoginDto 유저로그인 Dto
    */
   @Post('/login')
   async login(@Body() userLoginDto: UserLoginDto): Promise<string> {
