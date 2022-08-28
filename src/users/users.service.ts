@@ -70,8 +70,22 @@ export class UsersService {
    */
   async verifyEmail(signupVerifyToken: string): Promise<string> {
     // TODO
-    // 1. DB 에서 signupVerifyToken 으로 회원가입 처리중인 유저가 있는지 조회하고 없다면 에러 처리
-    // 2. 바로 로그인 상태가 되도록 JWT 를 발급
+    // 1. DB 에서 signupVerifyToken 으로 회원가입 처리중인 유저가 있는지 조회하고 없다면 에러처리
+    // 2. 바로 로그인 상태가 되도록 JWT 발급
+
+    throw new Error('Method not implemented');
+  }
+
+  /**
+   * 로그인
+   *
+   * @param email     이메일
+   * @param password  비밀번호
+   */
+  async login(email: string, password: string): Promise<string> {
+    // TODO
+    // 1. email, password 를 가진 유저가 존재하는지 DB 에서 확인하고 없다면 에러처리
+    // 2. JWT 발급
 
     throw new Error('Method not implemented');
   }
