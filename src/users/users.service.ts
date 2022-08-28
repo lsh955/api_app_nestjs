@@ -1,13 +1,16 @@
+import * as uuid from 'uuid';
+
 import {Injectable} from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
-  create(CreateUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
+  async createUser(name: string, email: string, password: string) {
+    await this.checkUserExists(email);
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const signupVerifyToken = uuid.v1();
+
+    await this.saveUser(name, email, password, signupVerifyToken);
+    await this.sendMemberJoinEmail(email, signupVerifyToken);
   }
 
   /**
