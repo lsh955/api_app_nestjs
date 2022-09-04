@@ -1,12 +1,14 @@
 import Mail = require('nodemailer/lib/mailer');
 import * as nodemailer from 'nodemailer';
+import emailConfig from 'src/config/emailConfig';
 
-import {Injectable} from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
+import {ConfigType} from '@nestjs/config';
 
 interface EmailOptions {
-  to: string;       // 수신자
-  subject: string;  // 메일제목
-  html: string;     // 메일본문
+  to: string; // 수신자
+  subject: string; // 메일제목
+  html: string; // 메일본문
 }
 
 /**
@@ -16,14 +18,14 @@ interface EmailOptions {
 export class EmailService {
   private transporter: Mail;
 
-  // TODO :: 계정정보와 인증 URL 은 추후에 환변변수로 뺄 것.
-
-  constructor() {
+  constructor(
+    @Inject(emailConfig.KEY) private config: ConfigType<typeof emailConfig>,
+  ) {
     this.transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      service: config.service,
       auth: {
-        user: '', // TODO: 이메일계정 아이디 입력
-        pass: '', // TODO: 이메일계정 비밀번호 입력
+        user: config.auth.user,
+        pass: config.auth.pass,
       },
     });
   }
@@ -32,7 +34,7 @@ export class EmailService {
     emailAddress: string,
     signupVerifyToken: string,
   ) {
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = this.config.baseUrl;
 
     // 유저가 누를 버튼이 가질 링크를 구성, 이 링크로 다시 우리 서비스로 이메일 인증 요청이 들어온다.
     const url = `${baseUrl}/users/email-verify?signupVerifyToken=${signupVerifyToken}`;
