@@ -13,7 +13,9 @@ export class CreateUserDto {
   @MaxLength(60)
   readonly email: string;
 
-  // 사용자 패스워드는 영문대소문자와 숫자 또는 특수문자(!, @, #, $, %, ^, &, *, (, ))로 이루어진 8자 이상 30자 이하의 문자열
+  // 사용자 패스워드 는
+  // 영문대소문자와 숫자 또는 특수문자(!, @, #, $, %, ^, &, *, (, ))로 이루어진
+  // 8자 이상 30자 이하의 문자열
   @IsString()
   @Matches(/^[A-Za-z\d!@#$%^&*()]{8,30}$/)
   readonly password: string;
