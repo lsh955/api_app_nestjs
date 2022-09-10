@@ -1,6 +1,8 @@
-import {IsEmail, IsString, Matches, MaxLength, MinLength,} from 'class-validator';
+import {IsEmail, IsString, Matches, MaxLength, MinLength, Transform,} from 'class-validator';
 
 export class CreateUserDto {
+  // 앞뒤에 포함된 공백제거
+  @Transform((params) => params.value.trim())
   // 사용자 이름은 2자 이상 30자 이하인 문자열
   @IsString()
   @MinLength(2)
