@@ -1,4 +1,5 @@
 import {Module} from '@nestjs/common';
+import {TypeOrmModule} from '@nestjs/typeorm';
 import {UsersModule} from './users/users.module';
 import {ConfigModule} from '@nestjs/config';
 import emailConfig from './config/emailConfig';
@@ -16,6 +17,18 @@ import {validationSchema} from './config/validationSchema';
       isGlobal: true,
       // 환경변수의 값에 대해 유효성 검사를 수행하도록 joi 를 이용하여 유효성 검사 객체를 작성
       validationSchema,
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DATABASE_HOST,
+      port: 3306,
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: 'test',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      // FIXME :: synchronize 옵션을 true 로 하면 서비스가 실행되고 데이터베이스가 연결될 때
+      //  항상 데이터베이스가 초기화 되므로 절대 프로덕션에는 true 로 하지 말 것.
+      synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
     }),
   ],
   controllers: [],
