@@ -1,11 +1,10 @@
-import {Body, Controller, Post, Query} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
 
 import {UsersService} from './users.service';
 import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
 import {UserLoginDto} from './dto/user.login.dto';
-
-// import {UserInfo} from './userInfo';
+import {UserInfo} from './userInfo';
 
 /**
  * 유저 컨트롤러
@@ -49,13 +48,13 @@ export class UsersController {
     return await this.usersService.login(email, password);
   }
 
-  // /**
-  //  * 유저정보 조회
-  //  *
-  //  * @param userId  아이디
-  //  */
-  // @Get()
-  // async getUserInfo(@Param('id') userId: string): Promise<UserInfo> {
-  //   return await this.usersService.getUserInfo(userId);
-  // }
+  /**
+   * 유저정보 조회
+   *
+   * @param userId  아이디
+   */
+  @Get()
+  async getUserInfo(@Param('id') userId: string): Promise<UserInfo> {
+    return await this.usersService.getUserInfo(userId);
+  }
 }

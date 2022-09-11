@@ -2,8 +2,7 @@ import * as uuid from 'uuid';
 import {Injectable} from '@nestjs/common';
 
 import {EmailService} from 'src/email/email.service';
-
-// import {UserInfo} from './userInfo';
+import {UserInfo} from './userInfo';
 
 /**
  * 유저 서비스(정보저장, 조회하는 역할을 위주로...)
@@ -92,16 +91,16 @@ export class UsersService {
     throw new Error('Method not implemented');
   }
 
-  // /**
-  //  * 유저정보 조회
-  //  *
-  //  * @param userId  아이디
-  //  */
-  // async getUserInfo(userId: string): Promise<UserInfo> {
-  //   // TODO
-  //   // 1. userId 를 가진 유저가 존재하는지 DB 에서 확인하고 없다면 에러처리
-  //   // 2. 조회된 데이터를 UserInfo 타입으로 응답
-  //
-  //   throw new Error('Method not implemented');
-  // }
+  /**
+   * 유저정보 조회
+   *
+   * @param userId  아이디
+   */
+  async getUserInfo(userId: string): Promise<UserInfo> {
+    // TODO
+    // 1. userId 를 가진 유저가 존재하는지 DB 에서 확인하고 없다면 에러처리
+    // 2. 조회된 데이터를 UserInfo 타입으로 응답
+
+    throw new Error('Method not implemented');
+  }
 }
