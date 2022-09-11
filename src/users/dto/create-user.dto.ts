@@ -1,4 +1,5 @@
-import {IsEmail, IsString, Matches, MaxLength, MinLength, Transform,} from 'class-validator';
+import {Transform} from 'class-transformer';
+import {IsEmail, IsString, Matches, MaxLength, MinLength,} from 'class-validator';
 
 export class CreateUserDto {
   // 앞뒤에 포함된 공백제거
