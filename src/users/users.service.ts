@@ -1,4 +1,5 @@
 import * as uuid from 'uuid';
+import {ulid} from 'ulid';
 import {Injectable} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
@@ -60,7 +61,7 @@ export class UsersService {
     signupVerifyToken: string,
   ) {
     const user = new UserEntity();
-    user.id = uuid();
+    user.id = ulid(); // 랜덤한 스트링을 생성하기 위해
     user.name = name;
     user.email = email;
     user.password = password;
