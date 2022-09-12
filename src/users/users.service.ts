@@ -89,7 +89,12 @@ export class UsersService {
    * @param signupVerifyToken 가입토큰
    * @private
    */
-  private async saveUserUsingQueryRunner(name: string, email: string, password: string, signupVerifyToken: string) {
+  private async saveUserUsingQueryRunner(
+    name: string,
+    email: string,
+    password: string,
+    signupVerifyToken: string,
+  ) {
     const queryRunner = this.connection.createQueryRunner();
 
     // QueryRunner에서 DB에 연결 후 트랜잭션을 시작
