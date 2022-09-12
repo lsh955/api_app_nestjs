@@ -53,13 +53,20 @@ export class UsersService {
    * @param signupVerifyToken 가입토큰
    * @private
    */
-  private saveUser(
+  private async saveUser(
     name: string,
     email: string,
     password: string,
     signupVerifyToken: string,
   ) {
-    return; // TODO: DB 연동 후 구현
+    const user = new UserEntity();
+    user.id = uuid();
+    user.name = name;
+    user.email = email;
+    user.password = password;
+    user.signupVerifyToken = signupVerifyToken;
+
+    await this.usersRepository.save(user);
   }
 
   /**
