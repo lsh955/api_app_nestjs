@@ -81,6 +81,45 @@ export class UsersService {
   }
 
   /**
+   * 사용자정보 저장(트랜잭션 처리 O)
+   *
+   * @param name              성함
+   * @param email             이메일
+   * @param password          비밀번호
+   * @param signupVerifyToken 가입토큰
+   * @private
+   */
+  private async saveUserUsingQueryRunner(name: string, email: string, password: string, signupVerifyToken: string) {
+    const queryRunner = this.connection.createQueryRunner();
+
+    // QueryRunner에서 DB에 연결 후 트랜잭션을 시작
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const user = new UserEntity();
+      user.id = ulid();
+      user.name = name;
+      user.email = email;
+      user.password = password;
+      user.signupVerifyToken = signupVerifyToken;
+
+      // 정상 동작을 수행했다면 트랜잭션을 커밋하여 영속화
+      await queryRunner.manager.save(user);
+
+      // DB 작업을 수행한 후 커밋을 해서 영속화
+      await queryRunner.commitTransaction();
+    } catch (e) {
+      // 에러가 발생하면 롤백
+      await queryRunner.rollbackTransaction();
+    } finally {
+      // 직접 생성한 QueryRunner 는 해제
+      // 생성한 QueryRunner 는 해제시켜 주어야 한다.
+      await queryRunner.release();
+    }
+  }
+
+  /**
    * 인증 이메일 발송
    *
    * @param email             이메일
