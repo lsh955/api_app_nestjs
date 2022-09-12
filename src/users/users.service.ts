@@ -1,6 +1,6 @@
 import {Injectable, UnprocessableEntityException} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
+import {Connection, Repository} from 'typeorm';
 import * as uuid from 'uuid';
 import {ulid} from 'ulid';
 
@@ -17,6 +17,7 @@ export class UsersService {
     private emailService: EmailService,
     @InjectRepository(UserEntity)
     private usersRepository: Repository<UserEntity>,
+    private connection: Connection,
   ) {}
 
   /**
