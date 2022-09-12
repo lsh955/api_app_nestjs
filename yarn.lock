@@ -5142,6 +5142,11 @@
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz"
   "version" "4.7.4"
 
+"ulid@^2.3.0":
+  "integrity" "sha512-keqHubrlpvT6G2wH0OEfSW4mquYRcbe/J8NMmveoQOjUqmo+hXtO+ORCpWhdbZ7k72UtY61BL7haGxW6enBnjw=="
+  "resolved" "https://registry.npmjs.org/ulid/-/ulid-2.3.0.tgz"
+  "version" "2.3.0"
+
 "universalify@^0.2.0":
   "integrity" "sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg=="
   "resolved" "https://registry.npmjs.org/universalify/-/universalify-0.2.0.tgz"
