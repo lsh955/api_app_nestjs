@@ -56,7 +56,7 @@ export class UsersService {
   }
 
   /**
-   * 사용자정보 저장
+   * 사용자정보 저장(트랜잭션 처리 X)
    *
    * @param name              성함
    * @param email             이메일
