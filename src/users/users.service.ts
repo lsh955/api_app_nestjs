@@ -38,11 +38,13 @@ export class UsersService {
   /**
    * 가입하려는 유저가 존재하는지 검사
    *
-   * @param email 이메일
+   * @param emailAddress  이메일
    * @private
    */
-  private checkUserExists(email: string) {
-    return false; // TODO: DB 연동 후 구현
+  private async checkUserExists(emailAddress: string): Promise<boolean> {
+    const user = await this.usersRepository.findOne({email: emailAddress});
+
+    return user !== undefined;
   }
 
   /**
