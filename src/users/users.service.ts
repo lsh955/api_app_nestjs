@@ -1,8 +1,8 @@
-import * as uuid from 'uuid';
-import {ulid} from 'ulid';
 import {Injectable, UnprocessableEntityException} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
+import * as uuid from 'uuid';
+import {ulid} from 'ulid';
 
 import {UserEntity} from './entities/user.entity';
 import {EmailService} from 'src/email/email.service';
