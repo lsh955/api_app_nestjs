@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 import {ulid} from 'ulid';
-import {Injectable} from '@nestjs/common';
+import {Injectable, UnprocessableEntityException} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 
@@ -27,6 +27,13 @@ export class UsersService {
    * @param password  비밀번호
    */
   async createUser(name: string, email: string, password: string) {
+    const userExist = await this.checkUserExists(email);
+    if (userExist) {
+      throw new UnprocessableEntityException(
+        '해당 이메일로는 가입할 수 없습니다.',
+      );
+    }
+
     await this.checkUserExists(email);
 
     const signupVerifyToken = uuid.v1();
