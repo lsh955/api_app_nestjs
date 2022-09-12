@@ -39,7 +39,14 @@ export class UsersService {
 
     const signupVerifyToken = uuid.v1();
 
-    await this.saveUser(name, email, password, signupVerifyToken);
+    // await this.saveUser(name, email, password, signupVerifyToken); 사용자정보 저장(트랜잭션 처리 X)
+    await this.saveUserUsingQueryRunner(
+      name,
+      email,
+      password,
+      signupVerifyToken,
+    ); // 사용자정보 저장(queryRunner 트랜잭션 처리 O)
+
     await this.sendMemberJoinEmail(email, signupVerifyToken);
   }
 
