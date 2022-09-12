@@ -38,4 +38,4 @@ $ yarn run test:cov
 - TypeScript
 - NestJS
 - TypeORM
-- MySQL
+- MySQL OR MariaDB
