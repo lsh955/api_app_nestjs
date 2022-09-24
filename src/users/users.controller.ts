@@ -1,10 +1,11 @@
-import {Body, Controller, Get, Headers, Param, Post, Query} from '@nestjs/common';
+import {Body, Controller, Get, Headers, Param, Post, Query, UseGuards} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
 import {UserLoginDto} from './dto/user.login.dto';
 import {UserInfo} from './userInfo';
 import {AuthService} from '../auth/auth.service';
+import {AuthGuard} from '../auth.guard';
 
 /**
  * 유저 컨트롤러
@@ -57,15 +58,12 @@ export class UsersController {
    * @param headers
    * @param userId  아이디
    */
+  @UseGuards(AuthGuard)
   @Get(':id')
   async getUserInfo(
     @Headers() headers: any,
     @Param('id') userId: string,
   ): Promise<UserInfo> {
-    const jwtString = headers.authorization.split('Bearer ')[1]; // 1. 헤더에서 JWT 파싱
-
-    this.authService.verify(jwtString); // 2. JWT 가 서버에서 발급한 것인지를 검증
-
     return this.usersService.getUserInfo(userId); // 3. UserService 를 통해 유저 정보를 가져와서 응답
   }
 }
