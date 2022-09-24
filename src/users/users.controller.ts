@@ -1,17 +1,21 @@
-import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
-
+import {Body, Controller, Get, Headers, Param, Post, Query, UseGuards} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
 import {UserLoginDto} from './dto/user.login.dto';
 import {UserInfo} from './userInfo';
+import {AuthService} from '../auth/auth.service';
+import {AuthGuard} from '../auth.guard';
 
 /**
  * 유저 컨트롤러
  */
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+  ) {}
 
   /**
    * 회원가입
@@ -51,10 +55,15 @@ export class UsersController {
   /**
    * 유저정보 조회
    *
+   * @param headers
    * @param userId  아이디
    */
-  @Get()
-  async getUserInfo(@Param('id') userId: string): Promise<UserInfo> {
-    return await this.usersService.getUserInfo(userId);
+  @UseGuards(AuthGuard)
+  @Get(':id')
+  async getUserInfo(
+    @Headers() headers: any,
+    @Param('id') userId: string,
+  ): Promise<UserInfo> {
+    return this.usersService.getUserInfo(userId); // 3. UserService 를 통해 유저 정보를 가져와서 응답
   }
 }

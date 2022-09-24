@@ -1,4 +1,4 @@
-import {Injectable, UnprocessableEntityException} from '@nestjs/common';
+import {Injectable, NotFoundException, UnprocessableEntityException} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Connection, Repository} from 'typeorm';
 import * as uuid from 'uuid';
@@ -7,6 +7,7 @@ import {ulid} from 'ulid';
 import {UserEntity} from './entities/user.entity';
 import {EmailService} from 'src/email/email.service';
 import {UserInfo} from './userInfo';
+import {AuthService} from '../auth/auth.service';
 
 /**
  * 유저 서비스(정보저장, 조회하는 역할을 위주로...)
@@ -18,6 +19,7 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private usersRepository: Repository<UserEntity>,
     private connection: Connection,
+    private authService: AuthService,
   ) {}
 
   /**
@@ -151,11 +153,17 @@ export class UsersService {
    * @param signupVerifyToken 가입토큰
    */
   async verifyEmail(signupVerifyToken: string): Promise<string> {
-    // TODO
-    // 1. DB 에서 signupVerifyToken 으로 회원가입 처리중인 유저가 있는지 조회하고 없다면 에러처리
-    // 2. 바로 로그인 상태가 되도록 JWT 발급
+    const user = await this.usersRepository.findOne({signupVerifyToken});
 
-    throw new Error('Method not implemented');
+    if (!user) {
+      throw new NotFoundException('유저가 존재하지 않습니다.');
+    }
+
+    return this.authService.login({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
   }
 
   /**
@@ -165,11 +173,17 @@ export class UsersService {
    * @param password  비밀번호
    */
   async login(email: string, password: string): Promise<string> {
-    // TODO
-    // 1. email, password 를 가진 유저가 존재하는지 DB 에서 확인하고 없다면 에러처리
-    // 2. JWT 발급
+    const user = await this.usersRepository.findOne({email, password});
 
-    throw new Error('Method not implemented');
+    if (!user) {
+      throw new NotFoundException('유저가 존재하지 않습니다');
+    }
+
+    return this.authService.login({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
   }
 
   /**
@@ -178,10 +192,16 @@ export class UsersService {
    * @param userId  아이디
    */
   async getUserInfo(userId: string): Promise<UserInfo> {
-    // TODO
-    // 1. userId 를 가진 유저가 존재하는지 DB 에서 확인하고 없다면 에러처리
-    // 2. 조회된 데이터를 UserInfo 타입으로 응답
+    const user = await this.usersRepository.findOne({id: userId});
 
-    throw new Error('Method not implemented');
+    if (!user) {
+      throw new NotFoundException('유저가 존재하지 않습니다');
+    }
+
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    };
   }
 }
