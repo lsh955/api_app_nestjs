@@ -7,6 +7,7 @@ import {ulid} from 'ulid';
 import {UserEntity} from './entities/user.entity';
 import {EmailService} from 'src/email/email.service';
 import {UserInfo} from './userInfo';
+import {AuthService} from '../auth/auth.service';
 
 /**
  * 유저 서비스(정보저장, 조회하는 역할을 위주로...)
@@ -18,6 +19,7 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private usersRepository: Repository<UserEntity>,
     private connection: Connection,
+    private authService: AuthService,
   ) {}
 
   /**
