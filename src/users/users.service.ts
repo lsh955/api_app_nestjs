@@ -173,11 +173,17 @@ export class UsersService {
    * @param password  비밀번호
    */
   async login(email: string, password: string): Promise<string> {
-    // TODO
-    // 1. email, password 를 가진 유저가 존재하는지 DB 에서 확인하고 없다면 에러처리
-    // 2. JWT 발급
+    const user = await this.usersRepository.findOne({email, password});
 
-    throw new Error('Method not implemented');
+    if (!user) {
+      throw new NotFoundException('유저가 존재하지 않습니다');
+    }
+
+    return this.authService.login({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
   }
 
   /**
