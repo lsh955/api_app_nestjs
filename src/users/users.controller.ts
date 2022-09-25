@@ -4,7 +4,6 @@ import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
 import {UserLoginDto} from './dto/user.login.dto';
 import {UserInfo} from './userInfo';
-import {AuthService} from '../auth/auth.service';
 import {AuthGuard} from '../auth.guard';
 import {HttpExceptionFilter} from '../exception/http-exception.filter';
 
@@ -14,10 +13,7 @@ import {HttpExceptionFilter} from '../exception/http-exception.filter';
 // @UseFilters(HttpExceptionFilter) 특정 컨트롤러 전체에 적용할 때
 @Controller('users')
 export class UsersController {
-  constructor(
-    private usersService: UsersService,
-    private authService: AuthService,
-  ) {}
+  constructor(private usersService: UsersService) {}
 
   /**
    * 회원가입
