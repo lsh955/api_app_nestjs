@@ -6,6 +6,7 @@ import emailConfig from './config/emailConfig';
 import authConfig from './config/authConfig';
 import {validationSchema} from './config/validationSchema';
 import {UsersModule} from './users/users.module';
+import {ExceptionModule} from './exception/exception.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import {UsersModule} from './users/users.module';
       //  항상 데이터베이스가 초기화 되므로 절대 프로덕션에는 true 로 하지 말 것.
       synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
     }),
+    ExceptionModule,
   ],
   controllers: [],
   providers: [],
