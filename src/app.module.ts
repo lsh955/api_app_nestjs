@@ -7,6 +7,7 @@ import authConfig from './config/authConfig';
 import {validationSchema} from './config/validationSchema';
 import {UsersModule} from './users/users.module';
 import {ExceptionModule} from './exception/exception.module';
+import {LoggingModule} from './logging/logging.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import {ExceptionModule} from './exception/exception.module';
       synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
     }),
     ExceptionModule,
+    LoggingModule,
   ],
   controllers: [],
   providers: [],
