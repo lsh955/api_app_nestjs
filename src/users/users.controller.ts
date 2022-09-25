@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Headers, Param, Post, Query, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Headers, Param, Post, Query, UseFilters, UseGuards} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
@@ -6,10 +6,12 @@ import {UserLoginDto} from './dto/user.login.dto';
 import {UserInfo} from './userInfo';
 import {AuthService} from '../auth/auth.service';
 import {AuthGuard} from '../auth.guard';
+import {HttpExceptionFilter} from '../exception/http-exception.filter';
 
 /**
  * 유저 컨트롤러
  */
+// @UseFilters(HttpExceptionFilter) 특정 컨트롤러 전체에 적용할 때
 @Controller('users')
 export class UsersController {
   constructor(
@@ -22,6 +24,7 @@ export class UsersController {
    *
    * @param createUserDto 회원가입 Dto
    */
+  @UseFilters(HttpExceptionFilter) // 특정 엔드포인트에 적용할 때
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     const {name, email, password} = createUserDto;
