@@ -2,6 +2,7 @@ import {Module} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {ConfigModule} from '@nestjs/config';
 import {TerminusModule} from '@nestjs/terminus';
+import {HttpModule} from '@nestjs/axios';
 
 import emailConfig from './config/emailConfig';
 import authConfig from './config/authConfig';
@@ -13,6 +14,7 @@ import {HealthCheckController} from './health-check/health-check.controller';
 
 @Module({
   imports: [
+    HttpModule,
     TerminusModule,
     UsersModule,
     ConfigModule.forRoot({
