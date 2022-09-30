@@ -1,6 +1,7 @@
 import {Module} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {ConfigModule} from '@nestjs/config';
+import {TerminusModule} from '@nestjs/terminus';
 
 import emailConfig from './config/emailConfig';
 import authConfig from './config/authConfig';
@@ -8,9 +9,11 @@ import {validationSchema} from './config/validationSchema';
 import {UsersModule} from './users/users.module';
 import {ExceptionModule} from './exception/exception.module';
 import {LoggingModule} from './logging/logging.module';
+import {HealthCheckController} from './health-check/health-check.controller';
 
 @Module({
   imports: [
+    TerminusModule,
     UsersModule,
     ConfigModule.forRoot({
       // out 디렉토리(dist 디렉토리) 아래에 존재하는 파일인 .XXX.env 파일의 절대 경로를 가리키게 설정
@@ -37,7 +40,6 @@ import {LoggingModule} from './logging/logging.module';
     ExceptionModule,
     LoggingModule,
   ],
-  controllers: [],
-  providers: [],
+  providers: [HealthCheckController],
 })
 export class AppModule {}
