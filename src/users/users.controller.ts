@@ -1,5 +1,5 @@
 import {Body, Controller, Get, Headers, Param, Post, Query, UseFilters, UseGuards} from '@nestjs/common';
-import {CommandBus} from '@nestjs/cqrs';
+import {CommandBus, QueryBus} from '@nestjs/cqrs';
 
 import {UsersService} from './users.service';
 import {CreateUserDto} from './dto/create-user.dto';
@@ -9,6 +9,7 @@ import {UserInfo} from './userInfo';
 import {AuthGuard} from '../auth.guard';
 import {HttpExceptionFilter} from '../exception/http-exception.filter';
 import {CreateUserCommand} from './command/create-user.command';
+import {GetUserInfoQuery} from './query/get-user-info.query';
 
 /**
  * 유저 컨트롤러
@@ -19,6 +20,7 @@ export class UsersController {
   constructor(
     private usersService: UsersService,
     private commandBus: CommandBus,
+    private queryBus: QueryBus,
   ) {}
 
   /**
@@ -74,6 +76,9 @@ export class UsersController {
     @Headers() headers: any,
     @Param('id') userId: string,
   ): Promise<UserInfo> {
-    return this.usersService.getUserInfo(userId); // 3. UserService 를 통해 유저 정보를 가져와서 응답
+    const getUserInfoQuery = new GetUserInfoQuery(userId);
+
+    //return this.usersService.getUserInfo(userId); // 3. UserService 를 통해 유저 정보를 가져와서 응답
+    return this.queryBus.execute(getUserInfoQuery);
   }
 }
