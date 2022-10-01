@@ -8,6 +8,7 @@ import {EmailModule} from '../email/email.module';
 import {AuthModule} from 'src/auth/auth.module';
 import {UsersService} from './users.service';
 import {CreateUserHandler} from './command/create-user.handler';
+import {UserEventsHandler} from './event/user-events.handler';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import {CreateUserHandler} from './command/create-user.handler';
     CqrsModule,
   ],
   controllers: [UsersController],
-  providers: [CreateUserHandler, UsersService, Logger],
+  providers: [CreateUserHandler, UserEventsHandler, UsersService, Logger],
 })
 export class UsersModule {}
