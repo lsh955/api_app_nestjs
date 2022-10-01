@@ -1,4 +1,6 @@
 import {Body, Controller, Get, Headers, Param, Post, Query, UseFilters, UseGuards} from '@nestjs/common';
+import {CommandBus, QueryBus} from '@nestjs/cqrs';
+
 import {UsersService} from './users.service';
 import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
@@ -6,6 +8,8 @@ import {UserLoginDto} from './dto/user.login.dto';
 import {UserInfo} from './userInfo';
 import {AuthGuard} from '../auth.guard';
 import {HttpExceptionFilter} from '../exception/http-exception.filter';
+import {CreateUserCommand} from './command/create-user.command';
+import {GetUserInfoQuery} from './query/get-user-info.query';
 
 /**
  * 유저 컨트롤러
@@ -13,7 +17,11 @@ import {HttpExceptionFilter} from '../exception/http-exception.filter';
 // @UseFilters(HttpExceptionFilter) 특정 컨트롤러 전체에 적용할 때
 @Controller('users')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   /**
    * 회원가입
@@ -24,7 +32,12 @@ export class UsersController {
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     const {name, email, password} = createUserDto;
-    return this.usersService.createUser(name, email, password);
+
+    const command = new CreateUserCommand(name, email, password);
+
+    // Controller 는 더 이상 Service 에 직접 의존하지 않는다.
+    // return this.usersService.createUser(name, email, password);
+    return this.commandBus.execute(command);
   }
 
   /**
@@ -63,6 +76,9 @@ export class UsersController {
     @Headers() headers: any,
     @Param('id') userId: string,
   ): Promise<UserInfo> {
-    return this.usersService.getUserInfo(userId); // 3. UserService 를 통해 유저 정보를 가져와서 응답
+    const getUserInfoQuery = new GetUserInfoQuery(userId);
+
+    //return this.usersService.getUserInfo(userId); // 3. UserService 를 통해 유저 정보를 가져와서 응답
+    return this.queryBus.execute(getUserInfoQuery);
   }
 }
