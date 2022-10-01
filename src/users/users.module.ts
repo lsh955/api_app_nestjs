@@ -7,6 +7,7 @@ import {UserEntity} from './entities/user.entity';
 import {EmailModule} from '../email/email.module';
 import {AuthModule} from 'src/auth/auth.module';
 import {UsersService} from './users.service';
+import {CreateUserHandler} from './command/create-user.handler';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import {UsersService} from './users.service';
     CqrsModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService, Logger],
+  providers: [CreateUserHandler, UsersService, Logger],
 })
 export class UsersModule {}
