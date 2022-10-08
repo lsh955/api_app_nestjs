@@ -30,6 +30,8 @@ export class UsersService {
    * @param password  비밀번호
    */
   async createUser(name: string, email: string, password: string) {
+    // FIXME :: CQRS 개념을 파악하기 위해 우선 createUser 메서드만 CQRS 분리
+
     const userExist = await this.checkUserExists(email);
     if (userExist) {
       throw new UnprocessableEntityException(
