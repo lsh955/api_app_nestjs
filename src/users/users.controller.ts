@@ -8,8 +8,8 @@ import {UserLoginDto} from './dto/user.login.dto';
 import {UserInfo} from './userInfo';
 import {AuthGuard} from '../auth.guard';
 import {HttpExceptionFilter} from '../exception/http-exception.filter';
-import {CreateUserCommand} from './command/create-user.command';
-import {GetUserInfoQuery} from './query/get-user-info.query';
+import {CreateUserCommand} from './application/command/create-user.command';
+import {GetUserInfoQuery} from './application/query/get-user-info.query';
 
 /**
  * 유저 컨트롤러

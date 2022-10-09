@@ -4,9 +4,9 @@ import {Injectable, UnprocessableEntityException} from '@nestjs/common';
 import {CommandHandler, EventBus, ICommandHandler} from '@nestjs/cqrs';
 import {CreateUserCommand} from './create-user.command';
 import {InjectRepository} from '@nestjs/typeorm';
-import {UserEntity} from '../entities/user.entity';
+import {UserEntity} from '../../entities/user.entity';
 import {Connection, Repository} from 'typeorm';
-import {UserCreatedEvent} from '../domain/user-created.event';
+import {UserCreatedEvent} from '../../domain/user-created.event';
 import {TestEvent} from '../event/test.event';
 
 @Injectable()

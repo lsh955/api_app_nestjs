@@ -7,8 +7,8 @@ import {UserEntity} from './entities/user.entity';
 import {EmailModule} from '../email/email.module';
 import {AuthModule} from 'src/auth/auth.module';
 import {UsersService} from './users.service';
-import {CreateUserHandler} from './command/create-user.handler';
-import {UserEventsHandler} from './event/user-events.handler';
+import {CreateUserHandler} from './application/command/create-user.handler';
+import {UserEventsHandler} from './application/event/user-events.handler';
 import {UserFactory} from './domain/user.factory';
 
 @Module({
