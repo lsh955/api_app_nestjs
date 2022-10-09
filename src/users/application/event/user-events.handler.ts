@@ -1,15 +1,12 @@
 import {EventsHandler, IEventHandler} from '@nestjs/cqrs';
 import {EmailService} from 'src/email/email.service';
 import {UserCreatedEvent} from '../../domain/user-created.event';
-import {TestEvent} from './test.event';
 
-@EventsHandler(UserCreatedEvent, TestEvent)
-export class UserEventsHandler
-  implements IEventHandler<UserCreatedEvent | TestEvent>
-{
+@EventsHandler(UserCreatedEvent)
+export class UserEventsHandler implements IEventHandler<UserCreatedEvent> {
   constructor(private emailService: EmailService) {}
 
-  async handle(event: UserCreatedEvent | TestEvent) {
+  async handle(event: UserCreatedEvent) {
     switch (event.name) {
       case UserCreatedEvent.name: {
         console.log('UserCreatedEvent!');
@@ -18,10 +15,6 @@ export class UserEventsHandler
           email,
           signupVerifyToken,
         );
-        break;
-      }
-      case TestEvent.name: {
-        console.log('TestEvent!');
         break;
       }
       default:
