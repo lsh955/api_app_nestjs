@@ -9,6 +9,7 @@ import {AuthModule} from 'src/auth/auth.module';
 import {UsersService} from './users.service';
 import {CreateUserHandler} from './command/create-user.handler';
 import {UserEventsHandler} from './event/user-events.handler';
+import {UserFactory} from './domain/user.factory';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import {UserEventsHandler} from './event/user-events.handler';
     TypeOrmModule.forFeature([UserEntity]),
     AuthModule,
     CqrsModule,
+    UserFactory,
   ],
   controllers: [UsersController],
   providers: [CreateUserHandler, UserEventsHandler, UsersService, Logger],
