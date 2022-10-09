@@ -1,7 +1,6 @@
 import {Body, Controller, Get, Headers, Param, Post, Query, UseFilters, UseGuards} from '@nestjs/common';
 import {CommandBus, QueryBus} from '@nestjs/cqrs';
 
-import {UsersService} from '../users.service';
 import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
 import {UserLoginDto} from './dto/user.login.dto';
@@ -10,6 +9,8 @@ import {AuthGuard} from '../../auth.guard';
 import {HttpExceptionFilter} from '../../exception/http-exception.filter';
 import {CreateUserCommand} from '../application/command/create-user.command';
 import {GetUserInfoQuery} from '../application/query/get-user-info.query';
+import {VerifyEmailCommand} from '../application/command/verify-email.command';
+import {LoginCommand} from '../application/command/login.command';
 
 /**
  * 유저 컨트롤러
@@ -17,11 +18,7 @@ import {GetUserInfoQuery} from '../application/query/get-user-info.query';
 // @UseFilters(HttpExceptionFilter) 특정 컨트롤러 전체에 적용할 때
 @Controller('users')
 export class UsersController {
-  constructor(
-    private usersService: UsersService,
-    private commandBus: CommandBus,
-    private queryBus: QueryBus,
-  ) {}
+  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   /**
    * 회원가입
@@ -49,7 +46,9 @@ export class UsersController {
   async verifyEmail(@Query() verifyEmailDto: VerifyEmailDto): Promise<string> {
     const {signupVerifyToken} = verifyEmailDto;
 
-    return await this.usersService.verifyEmail(signupVerifyToken);
+    const command = new VerifyEmailCommand(signupVerifyToken);
+
+    return await this.commandBus.execute(command);
   }
 
   /**
@@ -61,7 +60,9 @@ export class UsersController {
   async login(@Body() userLoginDto: UserLoginDto): Promise<string> {
     const {email, password} = userLoginDto;
 
-    return await this.usersService.login(email, password);
+    const command = new LoginCommand(email, password);
+
+    return await this.commandBus.execute(command);
   }
 
   /**
