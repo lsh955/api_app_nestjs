@@ -1,10 +1,9 @@
 import * as uuid from 'uuid';
-import {ulid} from 'ulid';
 import {Injectable, UnprocessableEntityException} from '@nestjs/common';
 import {CommandHandler, EventBus, ICommandHandler} from '@nestjs/cqrs';
 import {CreateUserCommand} from './create-user.command';
 import {InjectRepository} from '@nestjs/typeorm';
-import {UserEntity} from '../../entities/user.entity';
+import {UserEntity} from '../../infra/db/entity/user.entity';
 import {Connection, Repository} from 'typeorm';
 import {UserCreatedEvent} from '../../domain/user-created.event';
 
@@ -55,32 +54,5 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
     const user = await this.usersRepository.findOne({email: emailAddress});
 
     return user !== undefined;
-  }
-
-  /**
-   * 사용자정보 저장
-   *
-   * @param name              성함
-   * @param email             이메일
-   * @param password          패스워드
-   * @param signupVerifyToken 가입토큰
-   * @private
-   */
-  private async saveUserUsingTransaction(
-    name: string,
-    email: string,
-    password: string,
-    signupVerifyToken: string,
-  ) {
-    await this.connection.transaction(async (manager) => {
-      const user = new UserEntity();
-      user.id = ulid();
-      user.name = name;
-      user.email = email;
-      user.password = password;
-      user.signupVerifyToken = signupVerifyToken;
-
-      await manager.save(user);
-    });
   }
 }

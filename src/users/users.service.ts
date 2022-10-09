@@ -4,7 +4,7 @@ import {Connection, Repository} from 'typeorm';
 import * as uuid from 'uuid';
 import {ulid} from 'ulid';
 
-import {UserEntity} from './entities/user.entity';
+import {UserEntity} from './infra/db/entity/user.entity';
 import {EmailService} from 'src/email/email.service';
 import {UserInfo} from './interface/userInfo';
 import {AuthService} from '../auth/auth.service';
