@@ -29,4 +29,14 @@ export class UserFactory {
     // 생성한 유저도메인 객체를 Return
     return user;
   }
+
+  reconstitute(
+    id: string,
+    name: string,
+    email: string,
+    signupVerifyToken: string,
+    password: string,
+  ): User {
+    return new User(id, name, email, password, signupVerifyToken);
+  }
 }
