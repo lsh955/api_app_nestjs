@@ -37,16 +37,4 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
 
     this.userFactory.create(id, name, email, password, signupVerifyToken);
   }
-
-  /**
-   * 가입하려는 유저가 존재하는지 검사
-   *
-   * @param emailAddress  이메일
-   * @private
-   */
-  private async checkUserExists(emailAddress: string): Promise<boolean> {
-    const user = await this.usersRepository.findOne({email: emailAddress});
-
-    return user !== undefined;
-  }
 }
