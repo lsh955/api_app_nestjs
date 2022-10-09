@@ -10,6 +10,7 @@ import {UsersService} from './users.service';
 import {CreateUserHandler} from './application/command/create-user.handler';
 import {UserEventsHandler} from './application/event/user-events.handler';
 import {UserFactory} from './domain/user.factory';
+import {UserRepository} from './infra/db/repository/UserRepository';
 
 @Module({
   imports: [
@@ -20,6 +21,12 @@ import {UserFactory} from './domain/user.factory';
     UserFactory,
   ],
   controllers: [UsersController],
-  providers: [CreateUserHandler, UserEventsHandler, UsersService, Logger],
+  providers: [
+    CreateUserHandler,
+    UserEventsHandler,
+    UsersService,
+    Logger,
+    {provide: 'UserRepository', useClass: UserRepository},
+  ],
 })
 export class UsersModule {}
