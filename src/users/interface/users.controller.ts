@@ -1,15 +1,15 @@
 import {Body, Controller, Get, Headers, Param, Post, Query, UseFilters, UseGuards} from '@nestjs/common';
 import {CommandBus, QueryBus} from '@nestjs/cqrs';
 
-import {UsersService} from './users.service';
+import {UsersService} from '../users.service';
 import {CreateUserDto} from './dto/create-user.dto';
 import {VerifyEmailDto} from './dto/verify.email.dto';
 import {UserLoginDto} from './dto/user.login.dto';
 import {UserInfo} from './userInfo';
-import {AuthGuard} from '../auth.guard';
-import {HttpExceptionFilter} from '../exception/http-exception.filter';
-import {CreateUserCommand} from './application/command/create-user.command';
-import {GetUserInfoQuery} from './application/query/get-user-info.query';
+import {AuthGuard} from '../../auth.guard';
+import {HttpExceptionFilter} from '../../exception/http-exception.filter';
+import {CreateUserCommand} from '../application/command/create-user.command';
+import {GetUserInfoQuery} from '../application/query/get-user-info.query';
 
 /**
  * 유저 컨트롤러

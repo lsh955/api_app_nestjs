@@ -6,7 +6,7 @@ import {ulid} from 'ulid';
 
 import {UserEntity} from './entities/user.entity';
 import {EmailService} from 'src/email/email.service';
-import {UserInfo} from './userInfo';
+import {UserInfo} from './interface/userInfo';
 import {AuthService} from '../auth/auth.service';
 
 /**
