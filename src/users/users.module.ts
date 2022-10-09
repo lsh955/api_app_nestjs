@@ -11,6 +11,7 @@ import {CreateUserHandler} from './application/command/create-user.handler';
 import {UserEventsHandler} from './application/event/user-events.handler';
 import {UserFactory} from './domain/user.factory';
 import {UserRepository} from './infra/db/repository/UserRepository';
+import {EmailService} from './infra/adapter/email.service';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import {UserRepository} from './infra/db/repository/UserRepository';
     UsersService,
     Logger,
     {provide: 'UserRepository', useClass: UserRepository},
+    {provide: 'EmailService', useClass: EmailService},
   ],
 })
 export class UsersModule {}
