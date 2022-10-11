@@ -14,7 +14,15 @@ export class UserFactory {
   // EventBus 를 주입
   constructor(private eventBus: EventBus) {}
 
-  // 유저객체를 생성하는 create 함수를 제공
+  /**
+   * 사용자를 생성하는 가입(CREATE) 메서드
+   *
+   * @param id                아이디
+   * @param name              성함
+   * @param email             이메일
+   * @param signupVerifyToken 가입토큰
+   * @param password          패스워드
+   */
   create(
     id: string,
     name: string,
