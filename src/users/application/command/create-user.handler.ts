@@ -26,7 +26,7 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
     }
 
     const id = ulid();
-    const signupVerifyToken = uuid.v1();
+    const signupVerifyToken = uuid.v1(); // 가입토큰
 
     await this.userRepository.save(
       id,
@@ -36,6 +36,7 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
       signupVerifyToken,
     );
 
+    // 회원가입 가입진행
     this.userFactory.create(id, name, email, password, signupVerifyToken);
   }
 }
