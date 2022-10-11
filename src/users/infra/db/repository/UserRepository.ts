@@ -15,6 +15,11 @@ export class UserRepository implements IUserRepository {
     private userFactory: UserFactory,
   ) {}
 
+  /**
+   * 이메일정보로 사용자 찾기
+   *
+   * @param email 이메일
+   */
   async findByEmail(email: string): Promise<User | null> {
     // 전달된 이메일 주소를 가진 유저를 DB 조회
     const userEntity = await this.userRepository.findOne({email});
@@ -35,6 +40,12 @@ export class UserRepository implements IUserRepository {
     );
   }
 
+  /**
+   * 이메일과 패스워드로 사용자 정보찾기
+   *
+   * @param email     이메일
+   * @param password  패스워드
+   */
   async findByEmailAndPassword(
     email: string,
     password: string,
@@ -55,6 +66,11 @@ export class UserRepository implements IUserRepository {
     );
   }
 
+  /**
+   * 가입토큰으로 사용자 찾기
+   *
+   * @param signupVerifyToken 가입토큰
+   */
   async findBySignupVerifyToken(
     signupVerifyToken: string,
   ): Promise<User | null> {
@@ -74,6 +90,15 @@ export class UserRepository implements IUserRepository {
     );
   }
 
+  /**
+   * 사용자 정보저장
+   *
+   * @param id                아이디
+   * @param name              성함
+   * @param email             이메일
+   * @param password          패스워드
+   * @param signupVerifyToken 가입토큰
+   */
   async save(
     id: string,
     name: string,
