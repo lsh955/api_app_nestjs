@@ -36,8 +36,6 @@ import {HealthCheckController} from './health-check/health-check.controller';
       database: 'test',
       charset: 'utf8mb4',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      // FIXME :: synchronize 옵션을 true 로 하면 서비스가 실행되고 데이터베이스가 연결될 때
-      //  항상 데이터베이스가 초기화 되므로 절대 프로덕션에는 true 로 하지 말 것.
       synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
     }),
     ExceptionModule,
