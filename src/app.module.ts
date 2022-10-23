@@ -33,7 +33,7 @@ import {HealthCheckController} from './health-check/health-check.controller';
       port: 3306,
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
-      database: 'test',
+      database: process.env.DATABASE_NAME,
       charset: 'utf8mb4',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
