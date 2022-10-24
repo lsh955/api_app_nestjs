@@ -41,6 +41,6 @@ import {HealthCheckController} from './health-check/health-check.controller';
     ExceptionModule,
     LoggingModule,
   ],
-  providers: [HealthCheckController],
+  controllers: [HealthCheckController],
 })
 export class AppModule {}
