@@ -21,18 +21,27 @@ $ yarn run start:stg
 $ yarn run start:prod
 ```
 
-## Test
+[//]: # (## Test)
 
-```bash
-# unit tests
-$ yarn run test
+[//]: # ()
+[//]: # (```bash)
 
-# e2e tests
-$ yarn run test:e2e
+[//]: # (# unit tests)
 
-# test coverage
-$ yarn run test:cov
-```
+[//]: # ($ yarn run test)
+
+[//]: # ()
+[//]: # (# e2e tests)
+
+[//]: # ($ yarn run test:e2e)
+
+[//]: # ()
+[//]: # (# test coverage)
+
+[//]: # ($ yarn run test:cov)
+
+[//]: # (```)
+
 ## 기술 요구사항
 
 - TypeScript
