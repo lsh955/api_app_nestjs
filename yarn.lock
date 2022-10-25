@@ -719,7 +719,7 @@
 
 "@nestjs/cqrs@^8.0.1":
   version "8.0.5"
-  resolved "https://registry.yarnpkg.com/@nestjs/cqrs/-/cqrs-8.0.5.tgz#a24ee5e47ac9ca41b6f8ff29bc81dddacf7fed61"
+  resolved "https://registry.npmjs.org/@nestjs/cqrs/-/cqrs-8.0.5.tgz"
   integrity sha512-uOG7xY0e5WGEuCHKCqSsuy79i5fq6pj+zPQG/6LwpSdwHWaraIUR1N4ExAVof19AGQvDQMpCqMiTrb4O+HjlIg==
   dependencies:
     uuid "8.3.2"
@@ -2673,7 +2673,7 @@ fs.realpath@^1.0.0:
 
 fsevents@^2.3.2, fsevents@~2.3.2:
   version "2.3.2"
-  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
 function-bind@^1.1.1:
