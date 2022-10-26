@@ -27,17 +27,7 @@ import {HealthCheckController} from './health-check/health-check.controller';
       // 환경변수의 값에 대해 유효성 검사를 수행하도록 joi 를 이용하여 유효성 검사 객체를 작성
       validationSchema,
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DATABASE_HOST,
-      port: 3306,
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      charset: 'utf8mb4',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
-    }),
+    TypeOrmModule.forRoot(),
     ExceptionModule,
     LoggingModule,
   ],
