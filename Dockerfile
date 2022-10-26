@@ -5,8 +5,9 @@ FROM node:slim
 USER root
 
 # 파일을 WORKDIR(/) 로 복사한다
-# WORKDIR /
-# COPY
+WORKDIR /home/centos/app
+COPY package.json .
+COPY package-lock.json .
 
 # Nest.js project 를 install 한다
 RUN yarn install --immutable --immutable-cache --check-cache
